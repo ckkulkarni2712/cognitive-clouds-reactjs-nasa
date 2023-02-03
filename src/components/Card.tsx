@@ -7,7 +7,7 @@ const Card = ():JSX.Element => {
     const [name, setName] = useState<String>('');
     const [size, setSize] = useState<any>();
     const [url, setUrl] = useState<String>('');
-    const [search,setSearch] = useState<any>();
+    const [search, setSearch] = useState<any>();
     const [hazard, setHazard] = useState<any>();
     const idList = [200043, 2000719, 2000887, 2001036, 2001221, 2001566, 2001580,2001915,2001916,2001917,2001943,2001980, 2001620, 2001627, 2001685, 2001862, 2001863, 2001864, 2001865, 2001866];
     useEffect(() => {
@@ -17,9 +17,11 @@ const Card = ():JSX.Element => {
             setSize(resultSet.data.estimated_diameter.meters.estimated_diameter_max);
             setName(resultSet.data.name);
             setUrl(resultSet.data.nasa_jpl_url);
-            setHazard(resultSet.data.is_potentially_hazardous_asteroid);
+            setHazard(resultSet.data.is_potentially_hazardous_asteroid.toString());
+            
         }
-        getData();
+        if (search)
+            getData();
     },[search])
     const findAsteroid = () => {
         if (id !== 0) setSearch(id);
@@ -50,7 +52,7 @@ const Card = ():JSX.Element => {
               <h5 className='name'>Name: </h5>{name}
               <h5 className='size'>Size: </h5>{size}
               <h5 className='url'>NASA JPL URL: </h5>{url}
-              <h5 className='hazard'>Is Potentially Hazardous: </h5>{hazard.toString().charAt(0).toUpperCase()+hazard.toString().slice(1)}
+              <h5 className='hazard'>Is Potentially Hazardous: </h5>{hazard}
           </div>
     </div>
   )
